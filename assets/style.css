@@ -1,0 +1,26 @@
+div[data-testid="stChatMessage"] {
+    border-radius: 15px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+    border: 1px solid #172a45;
+}
+
+.stButton>button {
+    border-radius: 10px;
+    border: 1px solid #00b4d8;
+    color: #00b4d8;
+    background-color: transparent;
+}
+
+.stButton>button:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+div[data-testid="stFileUploader"] {
+    border: 2px dashed #172a45;
+    background-color: #0a192f;
+    border-radius: 15px;
+    padding: 1rem;
+}

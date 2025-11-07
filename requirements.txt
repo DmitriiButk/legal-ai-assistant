@@ -1,0 +1,14 @@
+langchain-chroma
+langchain-community
+langchain-core
+langchain-huggingface
+langchain-text-splitters
+chromadb
+streamlit
+pypdf
+sentence-transformers
+huggingface-hub
+transformers
+torch
+ruff
+
