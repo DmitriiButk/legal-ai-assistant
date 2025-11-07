@@ -92,3 +92,59 @@
     # Отформатировать код (включая сортировку импортов)
     ruff format .
    ```
+
+## Использование GPU для ускорения работы
+
+Для значительного ускорения обработки документов и генерации ответов рекомендуется использовать видеокарту NVIDIA с
+поддержкой CUDA.
+
+### Шаги для настройки GPU
+
+1. **Убедитесь, что у вас установлены последние драйверы NVIDIA**:
+
+   Проверьте версию драйверов и поддержку CUDA с помощью команды:
+   ```bash
+   nvidia-smi
+   ```
+   В выводе найдите строку "CUDA Version". Это максимальная версия CUDA, которую поддерживают ваши драйвера.
+
+
+2. **Установите правильную версию PyTorch с поддержкой CUDA**:
+
+   Удалите текущую версию PyTorch (если она установлена):
+   ```bash
+   pip uninstall torch
+   ```
+   Установите версию PyTorch, совместимую с вашей версией CUDA (например, для CUDA 12.1):
+   ```bash
+   pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+   ```
+   Замените cu121 на вашу версию CUDA (например, cu118 для CUDA 11.8).
+
+3. **Переустановите зависимости, связанные с PyTorch**:
+
+   ```bash
+   pip install --force-reinstall transformers
+   ```
+
+4. **Проверьте доступность GPU в Python**:
+   
+  Создайте временный файл check_gpu.py с содержимым:
+   ```python
+    import torch
+    print(f"PyTorch version: {torch.__version__}")
+    print(f"CUDA доступен: {torch.cuda.is_available()}")
+    if torch.cuda.is_available():
+        print(f"Количество GPU: {torch.cuda.device_count()}")
+        print(f"Имя устройства: {torch.cuda.get_device_name(0)}")
+```
+    
+   Запустите его:
+   ```bash
+   python check_gpu.py
+   ```
+   Вы должны увидеть, что CUDA доступен и указано имя вашей видеокарты.
+
+5. **Запустите приложение**: 
+
+Теперь приложение автоматически будет использовать GPU для ускорения работы.
