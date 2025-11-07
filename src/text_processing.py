@@ -1,3 +1,4 @@
+import torch
 from langchain_core.documents import Document
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -27,7 +28,8 @@ def get_embedding_function() -> HuggingFaceEmbeddings:
                                конкретной модели для генерации встраиваний.
     """
     model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
-    model_kwargs: dict = {"device": "cpu"}
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model_kwargs: dict = {"device": device}
     encode_kwargs: dict = {"normalize_embeddings": False}
 
     embeddings = HuggingFaceEmbeddings(model_name=model_name, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs)
